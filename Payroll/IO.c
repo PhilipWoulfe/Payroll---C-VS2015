@@ -144,7 +144,7 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 	
 	// create output file name
 	char *outfile_basic = "Payroll_Week_Ending_";
-	char *fileExtension = ".csv";
+	char *fileExtension = ".txt";
 
 	char *WEDate = getWEDate();
 

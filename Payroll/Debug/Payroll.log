@@ -1,9 +1,1 @@
-﻿  IO.c
-c:\users\phil\documents\visual studio 2015\projects\payroll\payroll\io.c(23): warning C4013: 'printText' undefined; assuming extern returning int
-c:\users\phil\documents\visual studio 2015\projects\payroll\payroll\io.c(36): warning C4047: 'function': 'size_t' differs in levels of indirection from 'char [5]'
-c:\users\phil\documents\visual studio 2015\projects\payroll\payroll\io.c(36): warning C4024: 'malloc': different types for formal and actual parameter 1
-c:\users\phil\documents\visual studio 2015\projects\payroll\payroll\io.c(112): warning C4047: 'function': 'size_t' differs in levels of indirection from 'char [5]'
-c:\users\phil\documents\visual studio 2015\projects\payroll\payroll\io.c(112): warning C4024: 'malloc': different types for formal and actual parameter 1
-c:\users\phil\documents\visual studio 2015\projects\payroll\payroll\io.c(171): warning C4047: 'function': 'size_t' differs in levels of indirection from 'char [5]'
-c:\users\phil\documents\visual studio 2015\projects\payroll\payroll\io.c(171): warning C4024: 'malloc': different types for formal and actual parameter 1
-  Payroll.vcxproj -> C:\Users\Phil\documents\visual studio 2015\Projects\Payroll\Debug\Payroll.exe
+﻿  Payroll.vcxproj -> C:\Users\blue7\Downloads\Payroll---C-VS2015-master\Debug\Payroll.exe

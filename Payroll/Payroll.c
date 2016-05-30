@@ -9,7 +9,10 @@
 * Create a program to calculate company payroll
 */
 
-#define _CRT_SECURE_NO_DEPRECATE
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,6 +21,8 @@
 #include <time.h>
 #include <windows.h>
 #include <math.h>;
+
+
 
 #include "Payroll.h"
 #include "Employee.h"
@@ -126,6 +131,8 @@ void processWages(Employee_t empArr[], int arrayLength) { //TODO reimplement
 			printf("Enter minutes worked for %s[Less than 60; Rounded down to nearest 15]: ", empArr[i].name);
 			empArr[i].minutesWorked = atoi(gets());
 		} while (empArr[i].minutesWorked < 0 || empArr[i].minutesWorked > 59);
+
+		displayHeader();
 
 		// round to nearest 15 minutes
 		empArr[i].minutesWorked = empArr[i].minutesWorked - (empArr[i].minutesWorked % 15);

@@ -10,6 +10,9 @@
 */
 
 #define _CRT_SECURE_NO_DEPRECATE
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
 
 #include <stdio.h>
 #include <windows.h>

@@ -10,6 +10,9 @@
 */
 
 #define _CRT_SECURE_NO_DEPRECATE
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
 
 #include <stdio.h>
 #include <windows.h>
@@ -33,7 +36,7 @@ int loadEmployees(Employee_t employees_p[], int arrayLength) {
 	{
 		/* Create message string */
 		char *message = "Could not open ";
-		char *messageFull = malloc(strlen(message) + 1 + strlen(infile) + "...\n");
+		char *messageFull = malloc(strlen(message) + 1 + strlen(infile) + "...\n" + 1);
 		strcpy(messageFull, message);
 		strcat(messageFull, infile);
 		strcat(messageFull, "...\n");
@@ -109,7 +112,7 @@ void saveEmployees(Employee_t employees_p[], int arrayLength) {
 	{
 		/* Create message string */
 		char *message = "Could not open ";
-		char *messageFull = malloc(strlen(message) + 1 + strlen(infile) + "...\n");
+		char *messageFull = malloc(sizeof(message) + 1 + sizeof(infile) + sizeof("...\n"));
 		strcpy(messageFull, message);
 		strcat(messageFull, infile);
 		strcat(messageFull, "...\n");
@@ -148,8 +151,7 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 
 	char *WEDate = getWEDate();
 
-
-	char *outfile = malloc(sizeof(outfile_basic) + sizeof(WEDate) + sizeof(fileExtension) + 1);
+	char *outfile = (char*)malloc(sizeof(outfile_basic) + sizeof(WEDate) + sizeof(fileExtension) + 100);
 
 	strcpy(outfile, outfile_basic);
 	outfile = strcat(outfile, WEDate);
@@ -168,7 +170,7 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 
 		// create error message
 		char *message = "Could not create ";
-		char *messageFull = malloc(strlen(message) + 1 + strlen(outfile) + "...\n");
+		char *messageFull = (char *) malloc(sizeof(message) + 1 + sizeof(outfile) + sizeof("...\n") + 1);
 		strcpy(messageFull, message);
 		strcat(messageFull, outfile);
 		//strcat(messageFull, "...\n");
@@ -189,11 +191,13 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 
 	fprintf(outptr, "   _______________________________________________________________________________\n");
 	fprintf(outptr, "  |                                                                               |\n");
-	fprintf(outptr, "  |                    Wolf Payroll - Payroll WE%s                        |\n", getWEDate());
+	fprintf(outptr, "  |                    Wolf Payroll - Payroll WE%s                        |\n", WEDate);
 	fprintf(outptr, "  |_______________________________________________________________________________|\n");
 	fprintf(outptr, "  |  # | Name                                 |   Hours | Hourly Rate |    Total  |\n");
 	fprintf(outptr, "  |____|______________________________________|_________|_____________|___________|\n");
 	fprintf(outptr, "  |    |                                      |         |             |           |\n");
+
+
 
 	for (int i = 0; i < arrayLength; i++) {
 
@@ -225,10 +229,13 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 	// close outfile
 	fclose(outptr);
 
+	// free memory
+	free(WEDate);
+	free(outfile); // TODO Causing error
+
 	Sleep(2000);
 
-	// free memory
-	//free(outfile); // TODO Causing error
+	_CrtDumpMemoryLeaks();
 
 }
 

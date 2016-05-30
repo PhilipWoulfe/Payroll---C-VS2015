@@ -10,6 +10,9 @@
 */
 
 #define _CRT_SECURE_NO_DEPRECATE
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
 
 // used to underline text for UI 
 #define ANSI_UNDERLINED_PRE  "\033[4m"
@@ -17,6 +20,8 @@
 
 #include "PayrollUI.h"
 #include "IO.h"
+//#include<iostream>;
+#include <conio.h>;
 
 /* Displays the header for the program */
 void displayHeader(void) {
@@ -89,8 +94,9 @@ void displayEmployees(Employee_t employees[], int arrayLength) {
 	printf("   _______________________________________________________________________________\n");
 	printf("  |                                                                               |\n");
 	printf("  |                    Wolf Payroll - Display Current Employees                   |\n");
-	printf("  | " ANSI_UNDERLINED_PRE "                                                                             " ANSI_UNDERLINED_POST " |\n");
-	printf("  | " ANSI_UNDERLINED_PRE " # | Name                                   | Department          | Pay Rate " ANSI_UNDERLINED_POST " |\n");
+	printf("  | _____________________________________________________________________________ |\n");
+	printf("  |  # | Name                                   | Department          | Pay Rate  |\n");
+	printf("  |  __|________________________________________|_____________________|_________  |\n");
 	printf("  |    |                                        |                     |           |\n");
 
 	for (int i = 0; i < arrayLength; i++) {
@@ -145,7 +151,7 @@ void displayEmployees(Employee_t employees[], int arrayLength) {
 
 	}
 
-	printf("  |" ANSI_UNDERLINED_PRE "____|________________________________________|_____________________|___________" ANSI_UNDERLINED_POST "|\n");
+	printf("  |____|________________________________________|_____________________|___________|\n");
 
 }
 
@@ -164,8 +170,9 @@ void displayNewEmployee(Employee_t employee, int arrayLength) {
 	printf("   _______________________________________________________________________________\n");
 	printf("  |                                                                               |\n");
 	printf("  |                           Wolf Payroll - New Employee                         |\n");
-	printf("  | " ANSI_UNDERLINED_PRE "                                                                             " ANSI_UNDERLINED_POST " |\n");
-	printf("  | " ANSI_UNDERLINED_PRE " # | Name                                   | Department          | Pay Rate " ANSI_UNDERLINED_POST " |\n");
+	printf("  | _____________________________________________________________________________ |\n");
+	printf("  |  # | Name                                   | Department          | Pay Rate  |\n");
+	printf("  |  __|________________________________________|_____________________|_________  |\n");
 	printf("  |    |                                        |                     |           |\n");
 
 	// Set Department
@@ -202,7 +209,7 @@ void displayNewEmployee(Employee_t employee, int arrayLength) {
 	}
 
 	printf("  | %2d | %-38s | %-19s | %-9s |\n", arrayLength + 1, name, dept, rate);
-	printf("  |" ANSI_UNDERLINED_PRE "____|________________________________________|_____________________|___________" ANSI_UNDERLINED_POST "|\n");
+	printf("  |____|________________________________________|_____________________|___________|\n");
 }
 
 /* Display Employee Status */
@@ -214,15 +221,16 @@ void displayStatusEmployee(Employee_t employee[], int arrayLength) {
 	printf("   _______________________________________________________________________________\n");
 	printf("  |                                                                               |\n");
 	printf("  |                          Wolf Payroll - Employee Status                       |\n");
-	printf("  | " ANSI_UNDERLINED_PRE "                                                                             " ANSI_UNDERLINED_POST " |\n");
-	printf("  | " ANSI_UNDERLINED_PRE " # | Name                                           | Current Employee       " ANSI_UNDERLINED_POST " |\n");
+	printf("  | _____________________________________________________________________________ |\n");
+	printf("  |  # | Name                                           | Current Employee        |\n");
+	printf("  |  __|________________________________________________|_______________________  |\n");
 	printf("  |    |                                                |                         |\n");
 
 	for (int i = 0; i < arrayLength; i++) {
 		printf("  | %2d | %-46s | %23s |\n", i + 1, employee[i].name, employee[i].currentEmployee ? "true" : "false");
 	}
 
-	printf("  |" ANSI_UNDERLINED_PRE "____|________________________________________________|_________________________" ANSI_UNDERLINED_POST "|\n");
+	printf("  |____|________________________________________________|_________________________|\n");
 }
 
 /* Display this weeks payroll */
@@ -231,12 +239,17 @@ void displayPayroll(Employee_t employee[], int arrayLength) {
 	clearScreen();
 	displayHeader();
 
+	char *WEDate = getWEDate();
+
 	printf("   _______________________________________________________________________________\n");
 	printf("  |                                                                               |\n");
-	printf("  |                    Wolf Payroll - Payroll WE%s                        |\n", getWEDate());
-	printf("  | " ANSI_UNDERLINED_PRE "                                                                             " ANSI_UNDERLINED_POST " |\n");
-	printf("  | " ANSI_UNDERLINED_PRE " # | Name                                 |   Hours | Hourly Rate |    Total " ANSI_UNDERLINED_POST " |\n");
+	printf("  |                    Wolf Payroll - Payroll WE%s                        |\n", WEDate);
+	printf("  | _____________________________________________________________________________ |\n");
+	printf("  |  # | Name                                 |   Hours | Hourly Rate |    Total  |\n");
+	printf("  | ___|______________________________________|_________|_____________|__________ |\n");
 	printf("  |    |                                      |         |             |           |\n");
+
+	free(WEDate);
 
 	for (int i = 0; i < arrayLength; i++) {
 
@@ -263,5 +276,5 @@ void displayPayroll(Employee_t employee[], int arrayLength) {
 
 	}
 
-	printf("  |" ANSI_UNDERLINED_PRE "____|______________________________________|_________|_____________|___________" ANSI_UNDERLINED_POST "|\n");
+	printf("  |____|______________________________________|_________|_____________|___________|\n");
 }

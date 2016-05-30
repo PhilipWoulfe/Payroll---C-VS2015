@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1464070916 source:c:\users\blue7\downloads\payroll---c-vs2015-master\payroll\employee.c
+	<stdio.h>
+	<windows.h>
+	"Employee.h"
+	"PayrollUI.h"
+
+1464070916 c:\users\blue7\downloads\payroll---c-vs2015-master\payroll\employee.h
+	<stdbool.h>
+
+1464070916 c:\users\blue7\downloads\payroll---c-vs2015-master\payroll\payrollui.h
+	<stdio.h>
+	<windows.h>
+	"Employee.h"
+
+1464606545 source:c:\users\blue7\downloads\payroll---c-vs2015-master\payroll\io.c
+	<stdio.h>
+	<windows.h>
+	"Employee.h"
+	"IO.h"
+
+1464070916 c:\users\blue7\downloads\payroll---c-vs2015-master\payroll\io.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+	<time.h>
+	<windows.h>
+	"Employee.h"
+

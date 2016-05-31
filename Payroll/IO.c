@@ -4,9 +4,11 @@
 * FIT ICTAP Procedural Programming Assignment
 *
 * Author Philip Woulfe
-* Version 1.0
+* Version 1.5
 * 2016-10-05
 * Body for IO
+*
+* Contains all the logic for dealing with file IO - Loading employees, saving employees and outputting payroll report
 */
 
 #define _CRT_SECURE_NO_DEPRECATE
@@ -25,7 +27,7 @@ int loadEmployees(Employee_t employees_p[], int arrayLength) {
 
 	printText("Loading employee records...");
 
-	Sleep(1000);
+	Sleep(1000); // Adds weight - make it seem like the program is doing something important
 
 	// remember filenames
 	char *infile = "EmployeeList.csv";
@@ -44,7 +46,7 @@ int loadEmployees(Employee_t employees_p[], int arrayLength) {
 		printText(messageFull);
 
 		printText("Creating File...");
-		Sleep(2000);
+		Sleep(2000); // Adds weight - make it seem like the program is doing something important
 
 		inptr = fopen(infile, "w");
 
@@ -55,23 +57,24 @@ int loadEmployees(Employee_t employees_p[], int arrayLength) {
 	}
 	else {
 		printText("Employee records loaded...");
-		Sleep(1000);
+		Sleep(1000); // Adds weight - make it seem like the program is doing something important
 	}
 
 	char line[50];
 	arrayLength = 0;
 
+	// read lines from file
 	while (fgets(line, 50, inptr))
 	{
 		char* tmp = _strdup(line);
 
+		// get specific field from line
 		strcpy(employees_p[arrayLength].name, getfield(tmp, 1));
 		employees_p[arrayLength].dept = atoi(getfield(_strdup(line), 2));
 		employees_p[arrayLength].rate = atoi(getfield(_strdup(line), 3));
 		employees_p[arrayLength].currentEmployee = atoi(getfield(_strdup(line), 4));
 
-
-		arrayLength++;
+		arrayLength++; // increase array length
 
 		// NOTE strtok clobbers tmp
 		free(tmp);
@@ -80,19 +83,26 @@ int loadEmployees(Employee_t employees_p[], int arrayLength) {
 	// close infile
 	fclose(inptr);
 
+	// return new array length - look, I don't like pointers, don't judge me
 	return arrayLength;
 }
 
+/* Gets a specific field from a line*/
 const char* getfield(char* line, int num)
 {
+	// do stuff
 	const char* tok;
+	
+	// loop
 	for (tok = strtok(line, ",");
 		tok && *tok;
 		tok = strtok(NULL, ",\n"))
 	{
 		if (!--num)
+			// witchcraft
 			return tok;
 	}
+	// magic
 	return NULL;
 }
 
@@ -101,7 +111,7 @@ void saveEmployees(Employee_t employees_p[], int arrayLength) {
 
 	printText("Saving employee records...");
 
-	Sleep(1000);
+	Sleep(1000); // Adds weight - make it seem like the program is doing something important
 
 	// remember filenames
 	char *infile = "EmployeeList.csv";
@@ -120,7 +130,7 @@ void saveEmployees(Employee_t employees_p[], int arrayLength) {
 		printText(messageFull);
 
 		printText("Creating File...");
-		Sleep(2000);
+		Sleep(2000); // Adds weight - make it seem like the program is doing something important
 
 		inptr = fopen(infile, "w");
 
@@ -131,9 +141,10 @@ void saveEmployees(Employee_t employees_p[], int arrayLength) {
 	}
 	else {
 		printText("File Located...");
-		Sleep(1000);
+		Sleep(1000); // Adds weight - make it seem like the program is doing something important
 	}
 
+	// do this for each employee
 	for (int i = 0; i < arrayLength; i++) {
 		fprintf(inptr, "%s,%d,%d,%d\n", employees_p[i].name, employees_p[i].dept, employees_p[i].rate, employees_p[i].currentEmployee);
 	}
@@ -153,21 +164,19 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 
 	char *outfile = (char*)malloc(sizeof(outfile_basic) + sizeof(WEDate) + sizeof(fileExtension) + 100);
 
+	// construct file name
 	strcpy(outfile, outfile_basic);
 	outfile = strcat(outfile, WEDate);
 	outfile = strcat(outfile, fileExtension);
 
 	printText("Creating output file...");
 
-	Sleep(2000);
+	Sleep(2000); // Adds weight - make it seem like the program is doing something important
 
 	// create output file
 	FILE* outptr = fopen(outfile, "w");
 	if (outptr == NULL)
 	{
-		// TODO reimplement somehow
-		//fclose(inptr);
-
 		// create error message
 		char *message = "Could not create ";
 		char *messageFull = (char *) malloc(sizeof(message) + 1 + sizeof(outfile) + sizeof("...\n") + 1);
@@ -176,8 +185,8 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 		//strcat(messageFull, "...\n");
 
 		printText(messageFull);
-
-		Sleep(2000);
+		 
+		Sleep(2000); // Adds weight - make it seem like the program is doing something important
 
 		// free memory
 		free(messageFull);
@@ -186,9 +195,10 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 	else {
 		printText("Output file created...");
 		printText("Saving...");
-		Sleep(2000);
+		Sleep(2000); // Adds weight - make it seem like the program is doing something important
 	}
 
+	// construct file interface
 	fprintf(outptr, "   _______________________________________________________________________________\n");
 	fprintf(outptr, "  |                                                                               |\n");
 	fprintf(outptr, "  |                    Wolf Payroll - Payroll WE%s                        |\n", WEDate);
@@ -207,20 +217,19 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 		}
 
 		char name[50];
-		strcpy(name, employees[i].name);
+		strcpy(name, employees[i].name); // copy name
 
 		char totalHours[10];
 		char totalMinutes[10];
 
-		sprintf(totalHours, "%d", employees[i].hoursWorked);
-		sprintf(totalMinutes, "%2d", employees[i].minutesWorked);
+		sprintf(totalHours, "%d", employees[i].hoursWorked); // convert int to char*
+		sprintf(totalMinutes, "%2d", employees[i].minutesWorked); // convert int to char*
 
-		strcat(totalHours, ".");
-		strcat(totalHours, totalMinutes);
+		strcat(totalHours, "."); // construct hours + minutes
+		strcat(totalHours, totalMinutes); // construct hours + minutes
 
+		// print to file
 		fprintf(outptr, "  | %2d | %-36s | %7s | $%10.2f | $%7.02f  |\n", i + 1, name, totalHours, employees[i].hourlyRate, employees[i].weeksWages);
-
-
 
 	}
 
@@ -231,11 +240,9 @@ void savePayroll (Employee_t employees[], int arrayLength) {
 
 	// free memory
 	free(WEDate);
-	free(outfile); // TODO Causing error
+	free(outfile); 
 
-	Sleep(2000);
-
-	_CrtDumpMemoryLeaks();
+	Sleep(2000); // Adds weight - make it seem like the program is doing something important
 
 }
 
@@ -248,6 +255,10 @@ char * getWEDate() {
 	time_t t = time(NULL);
 	struct tm tm = *localtime(&t);
 
+	// get week end date
+	tm.tm_mday += 7 - tm.tm_wday;
+	mktime(&tm); // resolve into real date
+
 	// get year
 	char year[5];
 	sprintf(year, "%d", tm.tm_year + 1900);
@@ -257,6 +268,7 @@ char * getWEDate() {
 	char tempMonth[3];
 	strcpy(month, "0");
 
+	// convert to actual month number
 	int monthNum = tm.tm_mon + 1;
 	sprintf(tempMonth, "%d", monthNum);
 
@@ -273,7 +285,7 @@ char * getWEDate() {
 	char tempDay[3];
 	strcpy(day, "0");
 
-	int dayNum = tm.tm_mday + 7 - tm.tm_wday; // gets date for Sunday of that week
+	int dayNum = tm.tm_mday; // gets date for Sunday of that week
 	sprintf(tempDay, "%d", dayNum);
 
 	// add 0 if necessary
@@ -282,6 +294,7 @@ char * getWEDate() {
 	else
 		strcpy(day, tempDay);
 
+	// declare variable and allocate memory
 	int temp = sizeof(year) + sizeof("-") + sizeof(day) + sizeof("-") + sizeof(month) + sizeof('\0');
 
 	result = malloc(temp);
@@ -296,6 +309,7 @@ char * getWEDate() {
 	// add day
 	result = strcat(result, day);
 
+	// add end of string
 	result = strcat(result, "\0");
 	return result;
 }

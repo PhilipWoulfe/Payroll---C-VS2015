@@ -4,15 +4,13 @@
 * FIT ICTAP Procedural Programming Assignment
 *
 * Author Philip Woulfe
-* Version 1.0
+* Version 1.5
 * 2016-10-05
 * Create a program to calculate company payroll
+* 
+* Starting point for program - handles the main programming loop
+* Contains the main method
 */
-
-//#define _CRTDBG_MAP_ALLOC
-//#include <stdlib.h>
-//#include <crtdbg.h>
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,14 +20,10 @@
 #include <windows.h>
 #include <math.h>;
 
-
-
 #include "Payroll.h"
 #include "Employee.h"
 #include "PayrollUI.h"
 #include "IO.h"
-
-
 
 int main(int argc, char* argv[])
 {
@@ -43,6 +37,7 @@ int main(int argc, char* argv[])
 	// declare variables
 	char input = 0;
 
+	// Create employee array
 	Employee_t employees[50];
 	if (NULL == employees) {
 		fprintf(stderr, "malloc failed\n");
@@ -64,6 +59,7 @@ int main(int argc, char* argv[])
 		// Loop until valid input
 		do {
 
+			// get input
 			input = getch();
 
 			switch (input) {
@@ -100,20 +96,17 @@ int main(int argc, char* argv[])
 
 	} while (input != '7');
 
-	//processWages();
-
 	printText("Exiting program...\n");
-	Sleep(2000);
+	Sleep(2000); // Adds weight - make it seem like the program is doing something important
 
 	// that's all folks
 	return 0;
 }
 
 /* Processes wages for employees and save to file */
-void processWages(Employee_t empArr[], int arrayLength) { //TODO reimplement
+void processWages(Employee_t empArr[], int arrayLength) {
 
 	displayHeader();
-
 
 	for (int i = 0; i < arrayLength; i++) {
 		
@@ -122,11 +115,13 @@ void processWages(Employee_t empArr[], int arrayLength) { //TODO reimplement
 			continue;
 		}
 		
+		// accept input of hours worked
 		do {
 			printf("Enter hours worked for %s[80 max]: ", empArr[i].name);
 			empArr[i].hoursWorked = atoi(gets());
 		} while (empArr[i].hoursWorked < 0 || empArr[i].hoursWorked > 81);
 
+		// accept input for minutes worked
 		do {
 			printf("Enter minutes worked for %s[Less than 60; Rounded down to nearest 15]: ", empArr[i].name);
 			empArr[i].minutesWorked = atoi(gets());
@@ -152,6 +147,7 @@ void processWages(Employee_t empArr[], int arrayLength) { //TODO reimplement
 				empArr[i].weeksWages = 0;
 		}
 
+		// calculate weekly pay
 		empArr[i] = calculateWeekly(empArr[i]);
 
 	}
@@ -160,31 +156,33 @@ void processWages(Employee_t empArr[], int arrayLength) { //TODO reimplement
 	
 	printText("Save Payroll to File?\n\n\t1. Save and Exit\n\t2. Cancel\n");
 
+	// holds save input choice
 	int saveInput;
 
+	// repeat until valid input
 	do {
 		printText("Select[1 - 2]:");
 		saveInput = getch() - '0'; // convert char to int
 	} while (saveInput < 1 || saveInput > 2);
 
+	// if option is save
 	if (saveInput == 1) {
 		savePayroll(empArr, arrayLength);
 	}
+	// if option is cancel
 	else {
 		printText("Cancelling...");
-		Sleep(2000);
+		Sleep(2000); // Adds weight - make it seem like the program is doing something important
 	}
-	
-	// save or discard?
-	
-
 }
 
 /* Calculate pay for the week per employee */
 Employee_t calculateWeekly(Employee_t employee) {
 	
+	// add minutes and hours, convert to decimal
 	float totalWorked = employee.hoursWorked + (employee.minutesWorked / 60.0);
 	
+	// calculate weekly wages
 	employee.weeksWages = totalWorked * employee.hourlyRate;
 
 	return employee;

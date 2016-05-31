@@ -4,23 +4,17 @@
 * FIT ICTAP Procedural Programming Assignment
 *
 * Author Philip Woulfe
-* Version 1.0
+* Version 1.5
 * 2016-10-05
 * Body for creation of UI
+*
+* Contains all the logic for outputting the UI including menus and payroll file structure
 */
 
 #define _CRT_SECURE_NO_DEPRECATE
-//#define _CRTDBG_MAP_ALLOC
-//#include <stdlib.h>
-//#include <crtdbg.h>
-
-// used to underline text for UI 
-#define ANSI_UNDERLINED_PRE  "\033[4m"
-#define ANSI_UNDERLINED_POST "\033[0m"
 
 #include "PayrollUI.h"
 #include "IO.h"
-//#include<iostream>;
 #include <conio.h>;
 
 /* Displays the header for the program */
@@ -58,13 +52,14 @@ void printText(char *text) {
 	// Formatting
 	printf("\n  ");
 
+	// Loop through characters in string
 	for (int i = 0; text[i] != '\0'; i++) {
 		printf("%c", text[i]);
 		fflush(stdout); // outputs to console 1 char at a time instead of buffering all first
-		Sleep(10);
+		Sleep(10); // Adds weight - make it seem like the program is doing something important
 	}
 
-	Sleep(50);
+	Sleep(50); // Adds weight - make it seem like the program is doing something important
 }
 
 /* Display main menu */
@@ -73,6 +68,7 @@ void displayMenu(void) {
 	clearScreen();
 	displayHeader();
 
+	// Display menu options
 	printText("Welcome to the Wolf Accounting Payroll System.\n");
 	printText("\t1. View Employees");
 	printText("\t2. Add Employee");
@@ -90,7 +86,7 @@ void displayEmployees(Employee_t employees[], int arrayLength) {
 
 	clearScreen();
 	displayHeader();
-	//printf("  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n");
+
 	printf("   _______________________________________________________________________________\n");
 	printf("  |                                                                               |\n");
 	printf("  |                    Wolf Payroll - Display Current Employees                   |\n");
@@ -99,6 +95,7 @@ void displayEmployees(Employee_t employees[], int arrayLength) {
 	printf("  |  __|________________________________________|_____________________|_________  |\n");
 	printf("  |    |                                        |                     |           |\n");
 
+	// Loop through employees
 	for (int i = 0; i < arrayLength; i++) {
 
 		// Skip former employees
@@ -114,35 +111,35 @@ void displayEmployees(Employee_t employees[], int arrayLength) {
 
 		// Set Department
 		switch (employees[i].dept) {
-		case 1:
-			dept = "HR";
-			break;
-		case 2:
-			dept = "IT";
-			break;
-		case 3:
-			dept = "Production";
-			break;
-		case 4:
-			dept = "Sales & Marketing";
-			break;
-		default:
-			printText("How the hell did you manage that?");
+			case 1:
+				dept = "HR";
+				break;
+			case 2:
+				dept = "IT";
+				break;
+			case 3:
+				dept = "Production";
+				break;
+			case 4:
+				dept = "Sales & Marketing";
+				break;
+			default:
+				printText("How the hell did you manage that?");
 		}
 
 		// Set pay rate
 		switch (employees[i].rate) {
-		case 1:
-			rate = "Associate";
-			break;
-		case 2:
-			rate = "Senior";
-			break;
-		case 3:
-			rate = "Manager";
-			break;
-		default:
-			printText("Seriously, how are you doing this?");
+			case 1:
+				rate = "Associate";
+				break;
+			case 2:
+				rate = "Senior";
+				break;
+			case 3:
+				rate = "Manager";
+				break;
+			default:
+				printText("Seriously, how are you doing this?");
 		}
 
 		bool current = employees[i].currentEmployee;
@@ -271,8 +268,6 @@ void displayPayroll(Employee_t employee[], int arrayLength) {
 		strcat(totalHours, totalMinutes);
 
 		printf("  | %2d | %-36s | %7s | $%10.2f | $%7.02f  |\n", i + 1, name, totalHours, employee[i].hourlyRate, employee[i].weeksWages);
-
-	
 
 	}
 

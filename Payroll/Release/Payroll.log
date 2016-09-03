@@ -1,0 +1,29 @@
+﻿  Employee.c
+Employee.c(33): warning C4013: 'gets' undefined; assuming extern returning int
+Employee.c(42): warning C4013: 'getch' undefined; assuming extern returning int
+Employee.c(69): warning C4013: 'saveEmployees' undefined; assuming extern returning int
+Employee.c(200): warning C4098: 'changeDept': 'void' function returning a value
+Employee.c(279): warning C4098: 'changeRate': 'void' function returning a value
+  IO.c
+IO.c(28): warning C4013: 'printText' undefined; assuming extern returning int
+IO.c(41): warning C4047: 'function': 'size_t' differs in levels of indirection from 'char *'
+IO.c(41): warning C4024: 'malloc': different types for formal and actual parameter 1
+  Payroll.c
+Payroll.c(21): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+Payroll.c(63): warning C4013: 'getch' undefined; assuming extern returning int
+Payroll.c(121): warning C4013: 'gets' undefined; assuming extern returning int
+Payroll.c(121): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
+Payroll.c(121): warning C4024: 'atoi': different types for formal and actual parameter 1
+Payroll.c(127): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
+Payroll.c(127): warning C4024: 'atoi': different types for formal and actual parameter 1
+Payroll.c(138): warning C4305: '=': truncation from 'double' to 'float'
+Payroll.c(141): warning C4305: '=': truncation from 'double' to 'float'
+Payroll.c(144): warning C4305: '=': truncation from 'double' to 'float'
+Payroll.c(170): warning C4013: 'savePayroll' undefined; assuming extern returning int
+Payroll.c(183): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  PayrollUI.c
+PayrollUI.c(18): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating code
+  All 30 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Payroll.vcxproj -> C:\Users\Phil\Documents\Visual Studio 2015\Projects\Payroll\Release\Payroll.exe

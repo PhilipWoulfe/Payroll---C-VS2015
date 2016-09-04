@@ -1,0 +1,21 @@
+﻿  IO.c
+IO.c(28): warning C4013: 'printText' undefined; assuming extern returning int
+IO.c(41): warning C4047: 'function': 'size_t' differs in levels of indirection from 'char *'
+IO.c(41): warning C4024: 'malloc': different types for formal and actual parameter 1
+  Payroll.c
+Payroll.c(21): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+Payroll.c(63): warning C4013: 'getch' undefined; assuming extern returning int
+Payroll.c(122): warning C4013: 'gets' undefined; assuming extern returning int
+Payroll.c(148): warning C4305: '=': truncation from 'double' to 'float'
+Payroll.c(151): warning C4305: '=': truncation from 'double' to 'float'
+Payroll.c(154): warning C4305: '=': truncation from 'double' to 'float'
+Payroll.c(180): warning C4013: 'savePayroll' undefined; assuming extern returning int
+Payroll.c(193): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  PayrollUI.c
+PayrollUI.c(18): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating code
+  1 of 30 functions ( 3.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Payroll.vcxproj -> C:\Users\Phil\Documents\Visual Studio 2015\Projects\Payroll\x64\Release\Payroll.exe

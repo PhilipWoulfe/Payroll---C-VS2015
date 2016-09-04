@@ -118,13 +118,23 @@ void processWages(Employee_t empArr[], int arrayLength) {
 		// accept input of hours worked
 		do {
 			printf("Enter hours worked for %s[80 max]: ", empArr[i].name);
-			empArr[i].hoursWorked = atoi(gets());
+			char tempstr[50];
+			gets(tempstr);
+			int temp = atoi(tempstr);
+			
+			//empArr[i].hoursWorked = 1;
+			empArr[i].hoursWorked = temp;
 		} while (empArr[i].hoursWorked < 0 || empArr[i].hoursWorked > 81);
 
 		// accept input for minutes worked
 		do {
 			printf("Enter minutes worked for %s[Less than 60; Rounded down to nearest 15]: ", empArr[i].name);
-			empArr[i].minutesWorked = atoi(gets());
+			
+			char tempstr[50];
+			gets(tempstr);
+			int temp = atoi(tempstr);
+			
+			empArr[i].minutesWorked = temp;
 		} while (empArr[i].minutesWorked < 0 || empArr[i].minutesWorked > 59);
 
 		displayHeader();

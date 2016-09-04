@@ -1,14 +1,7 @@
-﻿  Payroll.c
-Payroll.c(21): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-Payroll.c(63): warning C4013: 'getch' undefined; assuming extern returning int
-Payroll.c(122): warning C4013: 'gets' undefined; assuming extern returning int
-Payroll.c(132): warning C4047: 'function': 'const char *' differs in levels of indirection from 'int'
-Payroll.c(132): warning C4024: 'atoi': different types for formal and actual parameter 1
-Payroll.c(143): warning C4305: '=': truncation from 'double' to 'float'
-Payroll.c(146): warning C4305: '=': truncation from 'double' to 'float'
-Payroll.c(149): warning C4305: '=': truncation from 'double' to 'float'
-Payroll.c(175): warning C4013: 'savePayroll' undefined; assuming extern returning int
-Payroll.c(188): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  IO.c
+IO.c(28): warning C4013: 'printText' undefined; assuming extern returning int
+IO.c(41): warning C4047: 'function': 'size_t' differs in levels of indirection from 'char *'
+IO.c(41): warning C4024: 'malloc': different types for formal and actual parameter 1
   Generating code
   2 of 30 functions ( 6.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
